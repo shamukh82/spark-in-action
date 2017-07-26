@@ -1,0 +1,4 @@
+val licLines = sc.textFile("/usr/local/spark/LICENSE")
+licLines.count
+
+
