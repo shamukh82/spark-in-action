@@ -1,3 +1,5 @@
+import AssemblyKeys._
+assemblySettings
 
 name := "spark"
 
@@ -13,11 +15,24 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "org.apache.spark" %% "spark-core" % sparkVersion,
-  "org.apache.spark" %% "spark-sql" % sparkVersion,
-  "org.apache.spark" %% "spark-mllib" % sparkVersion,
-  "org.apache.spark" %% "spark-streaming" % sparkVersion,
-  "org.apache.spark" %% "spark-hive" % sparkVersion
+  "org.apache.spark" %% "spark-core" % sparkVersion % "provided",
+  "org.apache.spark" %% "spark-sql" % sparkVersion % "provided",
+  "org.apache.spark" %% "spark-mllib" % sparkVersion % "provided",
+  "org.apache.spark" %% "spark-streaming" % sparkVersion % "provided",
+  "org.apache.spark" %% "spark-hive" % sparkVersion % "provided"
 )
 
-        
+lazy val buildSettings = Seq(
+  version := "0.1-SNAPSHOT",
+  organization := "com.practice.spark",
+  scalaVersion := scalaVersion.value
+)
+
+val app = (project in file("app")).
+  settings(buildSettings: _*).
+  settings(assemblySettings: _*).
+  settings(
+    // your settings here
+  )
+
+jarName in assembly := "spark-in-action-practice.jar"
